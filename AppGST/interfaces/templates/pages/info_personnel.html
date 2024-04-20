@@ -1,0 +1,49 @@
+{% extends "bases/index.html" %}
+{% block title %}informations personnel{% endblock title %}
+{% block content %}
+<div class="container text-center mx-auto mb-10" style="width: 800px; margin-top: 30px;">
+<h1 class='text-center'>Informations personnels</h1>
+    
+    {% if personnel.photo %}
+    <div class="card text-center mx-auto mb-10" style="width: 18rem;">
+        <img src="{{ personnel.photo.url }}" class="card-img-top" alt="Photo">
+    </div>
+    {% endif %}
+</div>
+<table  class='table table-dark table-hover' border="1">
+    <thead>
+        <tr>
+            <th scope="col" class='color'>Nom</th>
+            <th scope="col" class='color'>Prénom</th>
+            <th scope="col" class='color'>Matricule</th>
+            <th scope="col" class='color'>Naissance</th>
+            <th scope="col" class='color'>Sexe</th>
+            <th scope="col" class='color'>Grade</th>
+            <th scope="col" class='color'>Service</th>
+            <th scope="col" class='color'>Numero</th>
+            <th scope="col" class='color'>Email</th>
+            
+            
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr>
+            <td class='color'>{{personnel.nom}}</td>
+            <td class='color'>{{personnel.prenom}}</td>
+            <td class='color'>{{personnel.matricule}}</td>
+            <td class='color'>{{personnel.naissance}}</td>
+            <td class='color'>{{personnel.sexe}}</td>
+            <td class='color'>{{personnel.grade}}</td>
+            <td class='color'>{{personnel.service}}</td>
+            <td class='color'>{{personnel.numero}}</td>
+            <td class='color'>{{personnel.email}}</td>
+        </tr>
+    </tbody>
+</table>
+<div class="container text-center mx-auto mb-10">
+    <button type="button" class="btn btn-primary"><a href="{% url 'interfaces:edit_personnel' personnel.matricule %}">Modifier</a></button>
+    <button type="button" class="btn btn-danger"><a href="{% url 'interfaces:delete_personnel' personnel.matricule %}">Supprimer</a></button>
+</div>
+
+{% endblock content %}

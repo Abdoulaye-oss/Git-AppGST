@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gérer les absences</title>
+</head>
+<body>
+    <h1>Gérer les absences</h1>
+    <form method="post" id="formulaire_absence">
+        {% csrf_token %}
+        <label><input type="radio" id="present" name="statut" value="present" checked onchange="toggleFields()"> Présent</label>
+        <label><input type="radio" id="absent" name="statut" value="absent" onchange="toggleFields()"> Absent</label><br><br>
+        
+        <!-- Champs nom et prénom automatiquement remplis -->
+        <label for="nom">Nom: </label>
+        <input type="text" id="membre_nom" name="nom" ><br><br>
+        <label for="nom">Prenom: </label>
+        <input type="text" id="membre_prenom" name="prenom"><br><br>
+        
+        <!-- Champs cachés pour stocker l'ID du personnel -->
+        <input type="hidden" id="id_personnel" name="personnel" value="">
+        
+        <!-- Champs affichés seulement si le statut est 'Absent' -->
+        <div id="absentFields" style="display: none;">
+            <label for="motif">Motif de l'absence:</label>
+            <input type="text" id="motif" name="motif" required><br><br>
+            
+            <label for="date_depart">Date de départ:</label>
+            <input type="date" id="date_depart" name="date_depart" required>
+    
+            <label for="heure_depart">Heure de départ:</label>
+            <input type="time" id="heure_depart" name="heure_depart" required><br><br>
+            
+            <label for="date_arrivee">Date d'arrivée:</label>
+            <input type="date" id="date_arrivee" name="date_arrivee">
+            
+            <label for="heure_arrivee">Heure d'arrivée:</label>
+            <input type="time" id="heure_arrivee" name="heure_arrivee"><br><br>
+        </div>
+        
+        <button type="submit">Enregistrer</button>
+    </form>
+
+    <script>
+        function toggleFields() {
+            var absentFields = document.getElementById("absentFields");
+            var absentRadio = document.getElementById("absent");
+
+            if (absentRadio.checked) {
+                absentFields.style.display = "block";
+            } else {
+                absentFields.style.display = "none";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // Récupérer tous les liens vers le formulaire
+            var liensPersonnel = document.querySelectorAll('.lien-personnel');
+
+            // Ajouter un écouteur d'événements pour chaque lien
+            liensPersonnel.forEach(function (lien) {
+                lien.addEventListener('click', function (event) {
+                    event.preventDefault(); // Empêcher le comportement par défaut du lien
+
+                    // Récupérer le nom et le prénom du personnel à partir des attributs de données du lien
+                    var nom = lien.getAttribute('data-nom');
+                    var prenom = lien.getAttribute('data-prenom');
+
+                    // Remplir automatiquement les champs du formulaire avec le nom et le prénom
+                    document.getElementById('membre_nom').value = nom;
+                    document.getElementById('membre_prenom').value = prenom;
+                    document.getElementById('id_personnel').value = lien.getAttribute('data-id'); // Ajouter l'ID du personnel dans un champ caché
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+<form method="POST" class="post-form">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="id_nom" class="form-label">Prénom et nom :</label>
+        {{ form.personnel }}
+    </div>
+
+    <div class="mb-3">
+        <label for="id_naissance" class="form-label">Motif :</label>
+        {{ form.motif }}
+    </div>
+    <div class="mb-3">
+        <label for="id_sexe" class="form-label">Date de départ :</label>
+        {{ form.date_depart }}
+    </div>
+    <div class="mb-3">
+        <label for="id_matricule" class="form-label">Heure de départ :</label>
+        {{ form.heure_depart }}
+    </div>
+    <div class="mb-3">
+        <label for="id_grade" class="form-label">Date d'arrivée :</label>
+        {{ form.date_arrivee }}
+    </div>
+    <div class="mb-3">
+        <label for="id_service" class="form-label">Heure d'arrivée :</label>
+        {{ form.heure_arrivee }}
+    </div>
+    <button type="submit" class="btn btn-primary"> Enregistrer </button>
+</form>

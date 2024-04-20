@@ -1,0 +1,53 @@
+{% extends "bases/index.html" %}
+{% block title %}Modification des informations personnels{% endblock title %}
+{% block content %}
+<div class="container" style="width: 800px; margin-top: 30px;">
+  <h2>Modification des informations du personnel:</h2>
+  <form method="POST" class="post-form" enctype="multipart/form-data" class='form single-welcome-hero-form welcome-hero-form'>
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="id_nom" class="form-label">Nom :</label>
+      {{ form.nom }}
+    </div>
+    <div class="mb-3">
+      <label for="id_prenom" class="form-label">Prénom :</label>
+      {{ form.prenom }}
+    </div>
+    <div class="mb-3">
+      <label for="id_naissance" class="form-label">Date de naissance :</label>
+      {{ form.naissance }}
+    </div>
+    <div class="mb-3">
+      <label for="id_sexe" class="form-label">Sexe :</label>
+      {{ form.sexe }}
+    </div>
+    <div class="mb-3">
+      <label for="id_matricule" class="form-label">Matricule :</label>
+      {{ form.matricule }}
+    </div>
+    <div class="mb-3">
+      <label for="id_grade" class="form-label">Grade :</label>
+      {{ form.grade }}
+    </div>
+    <div class="mb-3">
+      <label for="id_service" class="form-label">Service :</label>
+      {{ form.service }}
+    </div>
+    <div class="mb-3">
+      <label for="id_numero" class="form-label">Numéro de téléphone :</label>
+      {{ form.numero }}
+    </div>
+    <div class="mb-3">
+      <label for="id_email" class="form-label">Email :</label>
+      {{ form.email }}
+    </div>
+    <div class="mb-3">
+      <label for="id_photo" class="form-label">Photo :</label>
+      {{ form.photo }}
+    </div>
+    <button type="submit" class="btn btn-primary"> Enregistrer </button>
+  </form>
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,83 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	{% load static %}
+
+    <head>
+        <!-- meta data -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+        <!--font-family-
+		<link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+        ->
+        <!- title of site -->
+		<title> GST-{% block title %} {% endblock title %}</title>
+
+        <!-- For favicon png -->
+		<link rel="shortcut icon" type="image/icon" href="{% static 'assets/logo/favicon.png' %}">
+       
+        
+
+    </head>
+	
+	<body>
+		{% block header %}
+			{% include "bases/header.html" %}	
+		{% endblock header %}
+
+		{% block content %}
+		{% endblock content %}
+		
+		{% block footer %}
+			{% include "bases/footer.html" %}
+		{% endblock footer %}
+
+		{% block stylesheet %}
+			<!--font-awesome.min.css-->
+			<link rel="stylesheet" href="{% static 'assets/css/font-awesome.min.css'%}">
+
+			<!--linear icon css-->
+			<link rel="stylesheet" href="{% static 'assets/css/linearicons.css'%}">
+	
+			<!--animate.css-->
+			<link rel="stylesheet" href="{% static 'assets/css/animate.css'%}">
+	
+			<!--flaticon.css-->
+			<link rel="stylesheet" href="{% static 'assets/css/flaticon.css'%}">
+			<!--slick.css-->
+			<link rel="stylesheet" href="{% static 'assets/css/slick.css'%}">
+			<link rel="stylesheet" href="{% static 'assets/css/slick-theme.css'%}">
+			<!--bootstrap.min.css-->
+			<link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css'%}">
+			<!-- bootsnav -->
+			<link rel="stylesheet" href="{% static 'assets/css/bootsnav.css'%}">	
+			<!--style.css-->
+			<link rel="stylesheet" href="{% static 'assets/css/style.css'%}">
+			<!--responsive.css-->
+			<link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/fonts.googleapis.css' %}">
+		{% endblock stylesheet %}
+
+		{% block javascript %}
+			<script src="{% static 'assets/js/jquery.js'%}"></script>
+			<!--bootstrap.min.js-->
+			<script src="{% static 'assets/js/bootstrap.min.js'%}"></script>
+			<!-- bootsnav js -->
+			<script src="{% static 'assets/js/bootsnav.js'%}"></script>
+			<!--feather.min.js-->
+			<script  src="{% static 'assets/js/feather.min.js'%}"></script>
+			<!-- counter js -->
+			<script src="{% static 'assets/js/jquery.counterup.min.js'%}"></script>
+			<script src="{% static 'assets/js/waypoints.min.js'%}"></script>
+			<!--slick.min.js-->
+			<script src="{% static 'assets/js/slick.min.js'%}"></script>
+			<!--Custom JS-->
+			<script src="{% static 'assets/js/custom.js' %}"></script>
+            <script src="{% static 'assets/js/cdnjs.cloudflare.js' %}"></script>
+        
+		{% endblock javascript %}
+    </body>
+	
+</html>

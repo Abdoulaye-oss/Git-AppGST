@@ -1,0 +1,48 @@
+<section class="top-area">
+    <div class="header-area">
+        <!-- Start Navigation -->
+        <nav class="navbar navbar-default bootsnav navbar-sticky navbar-scrollspy" data-minus-value-desktop="70" data-minus-value-mobile="55" data-speed="1000">
+
+            <div class="container">
+
+                <!-- Start Header Navigation -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <a class="navbar-brand" href="{% url 'interfaces:accueil' %}">GST<span>-FRA</span></a>
+                </div>
+                <!-- End Header Navigation -->
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <!-- Afficher le menu uniquement si l'utilisateur est connecté -->
+                {% if request.user.is_authenticated %}
+                    <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
+                        <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Menu
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <li><a class="dropdown-item" href="{% url 'interfaces:accueil' %}">Accueil</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'interfaces:absence' %}">Absence</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'interfaces:historiques' %}">Historiques</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'interfaces:list_personnel' %}">Personnels</a></li>
+                                    <!-- Afficher le lien Admin uniquement pour les superutilisateurs -->
+                                    {% if request.user.is_superuser %}
+                                        <li><a class="dropdown-item" href="admin/">Admin</a></li>
+                                    {% endif %}
+                                    <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">Déconnexion</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                {% endif %}
+                <!-- /.navbar-collapse -->
+            </div><!--/.container-->
+            
+        </nav><!--/nav-->
+        <!-- End Navigation -->
+    </div><!--/.header-area-->
+    <div class="clearfix"></div>
+</section>

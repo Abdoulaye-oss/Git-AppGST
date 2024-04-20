@@ -1,0 +1,116 @@
+{% extends "bases/index.html" %}
+{% block title %}Nouvelle absence{% endblock title %}
+{% block content %}
+<h1>Nouvelle absence</h1>
+<div class="container" style="width: 800px; margin-top: 30px;">
+    <form method="POST" class="post-form">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_personnel" class="form-label">Membre du personnel :</label>
+            {{ form.personnel }}
+        </div>
+
+        <div class="mb-3">
+            <label for="id_type_absence" class="form-label">Type d'absence :</label>
+            {{ form.type_absence }}
+        </div>
+
+        <!-- Champs conditionnels -->
+        <div class="mb-3" id="field-motif-pcd" class="hidden">
+            <label for="id_motif_pcd" class="form-label">Motif PCD :</label>
+            {{ form.motif_pcd }}
+        </div>
+
+        <div class="mb-3" id="field-motif-pld" class="hidden">
+            <label for="id_motif_pld" class="form-label">Motif PLD :</label>
+            {{ form.motif_pld }}
+        </div>
+
+        <div class="mb-3" id="field-motif-asm" class="hidden">
+            <label for="id_motif_asm" class="form-label">Motif ASM :</label>
+            {{ form.motif_asm }}
+        </div>
+
+        <div class="mb-3" id="field-motif-repos-medical" class="hidden">
+            <label for="id_motif_repos_medical" class="form-label">Motif repos médical :</label>
+            {{ form.motif_repos_medical }}
+        </div>
+
+        <div class="mb-3" id="field-motif-service-interieur" class="hidden">
+            <label for="id_motif_service_interieur" class="form-label">Motif service intérieur :</label>
+            {{ form.motif_service_interieur }}
+        </div>
+
+        <div class="mb-3">
+            <label for="id_date_depart" class="form-label">Date de départ :</label>
+            {{ form.date_depart }}
+            <label for="id_heure_depart" class="form-label">Heure de départ :</label>
+            {{ form.heure_depart }}
+        </div>
+
+        <div class="mb-3">
+            <label for="id_date_arrivee" class="form-label">Date d'arrivée :</label>
+            {{ form.date_arrivee }}
+            <label for="id_heure_arrivee" class="form-label">Heure d'arrivée :</label>
+            {{ form.heure_arrivee }}
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Identifiez les champs de motif et le champ de type d'absence
+        const typeAbsenceField = document.getElementById('id_type_absence');
+        const motifFields = {
+            PCD: document.getElementById('field-motif-pcd'),
+            PLD: document.getElementById('field-motif-pld'),
+            ASM: document.getElementById('field-motif-asm'),
+            Repos_médical: document.getElementById('field-motif-repos-medical'),
+            Service_intérieur: document.getElementById('field-motif-service-interieur')
+        };
+    
+        // Fonction pour masquer/afficher les champs de motif en fonction du type d'absence
+        function updateMotifFields() {
+            const selectedTypeAbsence = typeAbsenceField.value;
+    
+            // Masquer tous les champs de motifs par défaut
+            for (const field in motifFields) {
+                motifFields[field].classList.add('hidden');
+            }
+    
+            // Afficher les champs de motifs en fonction du type d'absence sélectionné
+            if (motifFields[selectedTypeAbsence]) {
+                motifFields[selectedTypeAbsence].classList.remove('hidden');
+            }
+        }
+    
+        // Met à jour les champs de motif au chargement de la page
+        updateMotifFields();
+    
+        // Met à jour les champs de motif lorsque le type d'absence change
+        typeAbsenceField.addEventListener('change', updateMotifFields);
+    });
+    
+
+    // Gestion de la validation de la date et de l'heure
+    document.querySelector('form').addEventListener('submit', function(event) {
+        const dateDepart = document.getElementById('id_date_depart').value;
+        const heureDepart = document.getElementById('id_heure_depart').value;
+        const dateArrivee = document.getElementById('id_date_arrivee').value;
+        const heureArrivee = document.getElementById('id_heure_arrivee').value;
+
+        if (dateDepart && heureDepart && dateArrivee && heureArrivee) {
+            const departDateTime = new Date(`${dateDepart}T${heureDepart}`);
+            const arriveeDateTime = new Date(`${dateArrivee}T${heureArrivee}`);
+
+            if (departDateTime >= arriveeDateTime) {
+                alert("La date et l'heure d'arrivée doivent être postérieures à la date et l'heure de départ.");
+                event.preventDefault();
+            }
+        }
+    });
+</script>
+
+{% endblock content %}

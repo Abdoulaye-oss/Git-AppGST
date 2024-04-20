@@ -1,0 +1,14 @@
+{% extends "bases/index.html" %}
+{% block title %}Confirmation de suppression d'une absence{% endblock title %}
+{% block content %}
+    <h1>Confirmation de suppression d'une absence: </h1>
+    <div class="container" style="text-align:center">
+        <p style="font-size:20px">Êtes-vous sûr de vouloir supprimer cette absence de:
+        {{ absence.personnel.nom }}  {{absence.personnel.prenom}} ?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button class="btn btn-danger" type="submit">Confirmer</button>
+            <button class="btn btn-primary"><a href="{% url 'interfaces:absence' %}">Annuler</a></button>
+        </form>
+    </div>
+{% endblock content %}

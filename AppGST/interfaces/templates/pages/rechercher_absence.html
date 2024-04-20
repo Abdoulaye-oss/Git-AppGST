@@ -1,0 +1,59 @@
+{% extends "bases/index.html" %}
+{% block title %}Résultats de recherche{% endblock title %}
+{% block content %}
+{% include "bases/rechercher_absence.html" %}
+<div class="container">
+    <h1>Résultats de recherche : </h1>
+
+    <button type="button" class="btn btn-primary text-right">
+        <a href="{% url 'interfaces:ajouter_absence' %}" class="text-white">Ajouter une absence</a>
+    </button>
+
+    <table class="table table-dark table-hover" border="1">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Prénoms et noms</th>
+                <th scope="col">Grade</th>
+                <th scope="col">Matricule</th>
+                <th scope="col">Type d'absence</th>
+                <th scope="col">Date de départ</th>
+                <th scope="col">Heure de départ</th>
+                <th scope="col">Date d'arrivée</th>
+                <th scope="col">Heure d'arrivée</th>
+                <th scope="col">Durée d'absence</th>
+                <th scope="col">Motif spécifique</th>
+                <th scope="col">Service</th>
+                <th scope="col">Sexe</th>
+                <th scope="col">Situation</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for absence in les_absences %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>
+                        <a href="{% url 'interfaces:absences_personnel' absence.personnel.matricule %}" class="lien-membre_personnel" data-nom="{{ absence.personnel.nom }}" data-prenom="{{ absence.personnel.prenom }}" data-id="{{ absence.personnel.matricule }}">
+                            {{ absence.personnel.prenom }} {{ absence.personnel.nom }}
+                        </a>
+                    </td>
+                    <td>{{ absence.personnel.grade }}</td>
+                    <td>{{ absence.personnel.matricule }}</td>
+                    <td>{{ absence.type_absence }}</td>
+                    <td>{{ absence.date_depart }}</td>
+                    <td>{{ absence.heure_depart }}</td>
+                    <td>{{ absence.date_arrivee }}</td>
+                    <td>{{ absence.heure_arrivee }}</td>
+                    <td>{{ absence.duree_absence }}</td>
+                    <td>{{ absence.get_motif_specific }}</td>
+                    <td>{{ absence.personnel.service }}</td>
+                    <td>{{ absence.personnel.sexe }}</td>
+                    <td class="{% if absence.personnel.statut == 'Absent' %}text-danger{% else %}text-black{% endif %}">
+                        {{ absence.personnel.statut }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

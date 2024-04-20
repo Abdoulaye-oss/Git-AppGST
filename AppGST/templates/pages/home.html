@@ -1,0 +1,48 @@
+{% extends "bases/index.html" %}
+{% block title %} accueil {% endblock title %}
+{% block content %}
+<section id="home" class="welcome-hero">
+	<div class="container">
+		<div class="welcome-hero-txt">
+			<h2>GROUPEMENT SOUTIEN TECHNIQUE <br> GESTION DU PERSONNEL </h2>
+			<h3 style="font-size: 30px; margin: 25px;"> 
+				<strong class="text-danger">La situation du jour </strong>
+			</h3>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">Effectif théorique</th>
+						<th scope="col">Effectif présent</th>
+						<th scope="col">Effectif absent</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>{{ nombre_personnel }} </td>
+						<td>{{ nombre_present }}</td>
+						<td>{{nombre_absent}} </td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="3">{{date_actuelles}}</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+<style>
+	.table {
+		border-collapse: collapse;
+		width: 400px;
+		color:white;
+		text-align: center;
+		margin: 0 auto;
+		font-size: large;
+		border: 1 solid white;
+	}
+</style>
+
+</section>
+{% endblock content %}
+

@@ -1,0 +1,50 @@
+{% extends "pages/home.html" %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <h3 style="font-size:30px">Connexion: </h3>
+                <form action="" method="post" enctype="multipart/from.data">
+                    {% if form.non_field_errors %}
+                        {% for error in form.non_field_errors %}
+                            <p class="text-danger">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group">
+                            {{ field.label_tag }}
+                            {{ field }}
+                            {% if field.help_text %}
+                                <small class="form-text text-muted">{{ field.help_text }}</small>
+                            {% endif %}
+                            {% if field.errors %}
+                                {% for error in field.errors %}
+                                    <p class="text-danger"><strong>{{ error }}</strong></p>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-primary">Se connecter</button>
+                    <!-- Ajout du bouton d'inscription -->
+                </form>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+    <style>
+        /* Augmente la taille de police dans le formulaire */
+        form, form * {
+            font-size: 3rem; /* Ajustez la valeur selon vos besoins */
+        }
+        p {
+            font-size: 2rem; /* Ajustez la valeur selon vos besoins */
+        }
+        /* Style pour le bouton d'inscription */
+        .btn-secondary {
+            font-size: 1.5rem; /* Ajustez la taille de police selon vos besoins */
+        }
+    </style>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "bases/index.html" %}
+{% block title %}historiques{% endblock title %}
+{% block content %}
+<div class="container" style="width: 800px; margin-top: 30px;">
+    <h1>Historique des absences</h1>
+    <button type="button" class="btn btn-info"style="margin:10px">
+        <a href="{% url 'interfaces:disponibilite'%}">Disponibilité</a>
+    </button> 
+    <table class="table table-dark table-hover" border="1">
+        <thead>
+            <tr>
+                <th scope="col" style="color: black;font-size: 30px;margin-top: 25px;margin-bottom:20px">
+                    <strong class="text-danger">Toutes les absences enregistrées:</strong>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for absence in absences %}
+            <tr>
+                <td style="font-size:20px">
+                    <a href="{% url 'interfaces:absences_personnel' absence.personnel.matricule %}">{{ absence.personnel.nom }} {{ absence.personnel.prenom }}</a><br> 
+                    <p>Absent du: {{ absence.date_depart}} à {{ absence.heure_depart }} Au {{ absence.date_arrivee }} à {{ absence.heure_arrivee }}<br> Motif: {{ absence.motif }} <br> Durée d'absence: {{absence.duree_absence}} Heures </p>
+                    <button type="button" class="btn btn-primary">
+                        <a href="{% url 'interfaces:edit_absence' absence.id  %}">Modifier</a>
+                    </button>
+                    <button type="button" class="btn btn-danger">
+                        <a href="{% url 'interfaces:delete_absence' absence.id  %}">Supprimer</a>
+                    </button>
+
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+
+</div>
+{% endblock content %}

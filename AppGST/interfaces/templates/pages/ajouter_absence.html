@@ -1,0 +1,34 @@
+{% extends "bases/index.html" %}
+{% block title %}ajouter_absence{% endblock title %}
+{% block content %}
+{% include "bases/rechercher.html" %}
+<h1>Ajouter une absence: </h1>
+<div class="container" style="width: 800px; margin-top: 30px;">
+    <table class="table table-dark table-hover" border="1">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col" class='color'>Prénoms et Noms</th>
+                <th scope="col" class='color'>Grades</th>
+                <th scope="col" class='color'>Matricules</th>
+                <th scope="col" class='color'>Situations</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for personnel in personnels %}
+            <tr>
+                <td class='color'>{{ forloop.counter }}</td>
+                <td><a href="{% url 'interfaces:une_absence' personnel.matricule %}" class="lien-membre_personnel" data-nom="{{ personnel.nom }}" data-prenom="{{ personnel.prenom }}" data-id="{{ personnel.matricule }}">{{personnel.prenom}}  {{ personnel.nom }}</a></td>
+                <td class='color'>{{ personnel.grade }}</td>
+                <td class='color'>{{ personnel.matricule }}</td>
+                <td class="{% if personnel.statut == 'Absent' %}text-danger{% else %}text-black{% endif %}">
+                    {{ personnel.statut }}
+               </td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

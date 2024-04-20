@@ -1,0 +1,32 @@
+{% extends "bases/index.html" %}
+{% block title %}resultats de recherche{% endblock title %}
+{% block content %}
+{% include "bases/rechercher.html" %}
+<div class="container" style="width: 800px; margin-top: 30px;">
+    <h1>Resutats de recherche: </h1>
+    <button type="button" class="btn btn-info"><a href="{% url 'interfaces:ajouter_personnel'%}">Ajouter du personnel</a></button>
+
+    <table class="table table-dark table-hover" border="1">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col" class='color'>Prénom et Nom</th>
+                <th scope="col" class='color'>Grade</th>
+                <th scope="col" class='color'>Service</th>
+                <th scope="col" class='color'>Matricule</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for personnel in personnels %}
+            <tr>
+                <td class='color'>{{ forloop.counter }}</td>
+                <td class='color'><a href="{% url 'interfaces:info_personnel' personnel.matricule %}">{{ personnel.prenom }} {{ personnel.nom }}</a></td>
+                <td class='color'>{{ personnel.grade }}</td>
+                <td class='color'>{{ personnel.service }}</td>
+                <td class='color'>{{ personnel.matricule }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}
